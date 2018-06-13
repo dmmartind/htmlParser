@@ -1,55 +1,60 @@
 from html.parser import HTMLParser
 from html.entities import name2codepoint
 
-strings = ["" for x in range(5000)]
+strings = ["" for x in range(500)]
+
+def convertTuple(aInput):
+    str = '['
+    for attr in aInput:
+        str = str + attr[0] + '=>' + attr[1] + ', '
+    str = ']'
+    return str
+        
 
 def openTag(tag,attrs):
-    sAttr = '['
-    for attr in attrs:
-        sAttr.join(attr)
-        sAttr.join(', ')
+    
     if tag == 'html':
-        strings.append(  "$this->openHtml(FALSE);");
+        strings.append(  "$this->openHtml(FALSE);")
     if tag == 'title':
-        stri =  "$this->Title( {%s}, FALSE );", sAttr
-        strings.append( stri );
+        stri =  "$this->Title( {%s}, FALSE );" % convertTuple(attrs)
+        strings.append( stri )
     if tag == 'span':
-        strings.append(  "$this->openSpan( {%s}, FALSE );", sAttr)
+        strings.append(  "$this->openSpan( {%s}, FALSE );" % convertTuple(attrs))
     if tag == 'head':
-        stri = "$this->openHead( {%s}, FALSE );", sAttr
+        stri = "$this->openHead( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'body':
-        stri = "$this->openBody( {%s}, FALSE );", sAttr
+        stri = "$this->openBody( {%s}, FALSE );" % convertTuple(attrs)
         strings.append(stri)
     if tag == 'p':
-        stri = "$this->openP( {%s}, FALSE );", sAttr
+        stri = "$this->openP( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'noscript':
-        stri = "$this->NoScript( {%s}, FALSE );", sAttr
+        stri = "$this->NoScript( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'link':
-        stri = "$this->Link( {%s}, FALSE );", sAttr
+        stri = "$this->Link( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'button':
-        stri = "$this->Button( {%s}, FALSE );", sAttr
+        stri = "$this->Button( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     if tag == 'iframe':
-        stri = "$this->iFrame( {%s}, FALSE );", sAttr
+        stri = "$this->iFrame( {%s}, FALSE );" % convertTuple(attrs)
         strings.append(stri  )
     if tag == 'meta':
-        stri = "$this->Meta( {%s}, FALSE );", sAttr
+        stri = "$this->Meta( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'script':
-        stri = "$this->Script( {%s}, FALSE );", sAttr
+        stri = "$this->Script( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'div':
-        stri = "$this->openDiv( {%s}, FALSE );", sAttr
+        stri = "$this->openDiv( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'label':
-        stri = "$this->Label( {%s}, FALSE );", sAttr
+        stri = "$this->Label( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     if tag == 'input':
-        stri = "$this->Input( {%s}, FALSE );", sAttr
+        stri = "$this->Input( {%s}, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
 
         
@@ -61,46 +66,46 @@ def closeTag(tag):
         stri = "$this->closeHtml(FALSE);"
         strings.append( stri )
     if tag == 'title':
-        stri = "$this->Title( {%s}, FALSE );", sAttr
+        stri = "$this->Title( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'span':
-        stri = "$this->closeSpan( {%s}, FALSE );", sAttr
+        stri = "$this->closeSpan( {%s}, FALSE );"
         strings.append( stri )
     if tag == 'head':
-        stri = "$this->closeHead( {%s}, FALSE );", sAttr
+        stri = "$this->closeHead( {%s}, FALSE );"
         strings.append( stri )
     if tag == 'body':
-        stri = "$this->closeBody( {%s}, FALSE );", sAttr
+        stri = "$this->closeBody( {%s}, FALSE );"
         strings.append( stri  )
     if tag == 'p':
-        stri = "$this->closeP( {%s}, FALSE );", sAttr
+        stri = "$this->closeP( {%s}, FALSE );"
         strings.append( stri )
     if tag == 'noscript':
-        stri = "$this->NoScript( {%s}, FALSE );", sAttr
+        stri = "$this->NoScript( {%s}, FALSE );"
         strings.append( stri )
     if tag == 'link':
-        stri = "$this->Link( {%s}, FALSE );", sAttr
+        stri = "$this->Link( {%s}, FALSE );"
         strings.append(stri  )
     if tag == 'button':
-        stri = "$this->Button( {%s}, FALSE );", sAttr
+        stri = "$this->Button( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'iframe':
-        stri = "$this->iFrame( {%s}, FALSE );", sAttr
+        stri = "$this->iFrame( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'meta':
-        str = "$this->Meta( {%s}, FALSE );", sAttr
+        str = "$this->Meta( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'script':
-        stri = "$this->Script( {%s}, FALSE );", sAttr
+        stri = "$this->Script( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'div':
-        stri = "$this->closeDiv( {%s}, FALSE );", sAttr
+        stri = "$this->closeDiv( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'label':
-        stri = "$this->Label( {%s}, FALSE );", sAttr
+        stri = "$this->Label( {%s}, FALSE );"
         strings.append(stri )
     if tag == 'input':
-        stri = "$this->Input( {%s}, FALSE );", sAttr
+        stri = "$this->Input( {%s}, FALSE );"
         strings.append( stri)     
     
 
@@ -109,7 +114,7 @@ class MyHtmlParser(HTMLParser):
         print("Start tag: ", tag)
         for attr in attrs:
             print("    attr:", attr)
-        openTag(tag,attrs);
+        openTag(tag,attrs)
     def handle_endtag(self, tag):
         print("End tag   :", tag)
         closeTag(tag)
@@ -124,7 +129,7 @@ class MyHtmlParser(HTMLParser):
         if name.startswitch('x'):
             c=chr(int(name[1:], 16))
         else:
-            c= char(int(name))
+            c= chr(int(name))
         print("Num ent     :", c)
     def handle_decl(self, data):
         print("Decl     :", data)
@@ -132,6 +137,9 @@ class MyHtmlParser(HTMLParser):
 
 parser = MyHtmlParser()
 str = open('index.html', 'r').read()
-parser.feed(str);
+parser.feed(str)
+hdl = open('index.php', 'w')
 for line in strings:
-    print(line)
+    test = line
+    print(test)
+hdl.close()
