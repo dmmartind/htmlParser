@@ -101,8 +101,7 @@ def openTag(tag,attrs):
         stri = "$this->openForm( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'a':
-        stri = "$this->ATag( %s, FALSE );" % convertTuple(attrs)
-        strings.append( stri  )
+        stri = ""
     elif tag == 'img':
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
@@ -110,7 +109,7 @@ def openTag(tag,attrs):
         stri = "$this->openLI( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'ul':
-        stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openUL( [], FALSE );"
         strings.append( stri  )
     elif tag == 'img':
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
@@ -173,12 +172,13 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->closeLI( %s, FALSE );" % convertData(attr,data)
         strings.append(stri)
     elif tag == 'ul':
-        stri = "$this->closeUL( %s, FALSE );" % convertData(attr,data)
+        stri = "$this->closeUL( [], FALSE );"
         strings.append(stri)
     elif tag == 'label':
         stri = ""
     elif tag == 'a':
-        stri = ""
+        stri = "$this->aTag( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
     elif tag == 'img':
         stri = ""
     
