@@ -16,24 +16,20 @@ $this->closeDiv( [], FALSE );
 $this->openDiv( ['id'=>'pageContent', 'class'=>'pageContent'], FALSE );
 $this->openDiv( ['id'=>'leftMenu'], FALSE );
 $this->openDiv( ['id'=>'section-menu'], FALSE );
-$this->openUL( ['id'=>'filterMenu'], FALSE );
+$this->openUL( [], FALSE );
 $this->openLI( ['style'=>'margin-bottom:10px;'], FALSE );
-$this->ATag( ['class'=>'menuitem', 'style'=>'text-decoration: none;'], FALSE );
+$this->aTag( ['class'=>'menuitem', 'style'=>'text-decoration: none;', 'text' =>'Products'], FALSE );
 $this->openDiv( ['id'=>'products', 'class'=>'categoriesDiv'], FALSE );
-$this->openUL( ['id'=>'categories', 'class'=>'submenu'], FALSE );
-$this->closeUL( ['id'=>'categories', 'class'=>'submenu', 'text' =>'
-
-                                                '], FALSE );
+$this->openUL( [], FALSE );
+$this->closeUL( [], FALSE );
 $this->closeDiv( [], FALSE );
 $this->closeLI( [], FALSE );
 $this->openLI( ['style'=>'margin-bottom:10px;'], FALSE );
-$this->ATag( ['class'=>'menuitem', 'style'=>'text-decoration: none;'], FALSE );
+$this->aTag( ['class'=>'menuitem', 'style'=>'text-decoration: none;', 'text' =>'Manufacturer'], FALSE );
 $this->openDiv( ['id'=>'refineBrands1', 'class'=>'refineBrands1'], FALSE );
 $this->openDiv( ['id'=>'refineBrands2', 'class'=>'refineBrands2'], FALSE );
-$this->openUL( ['id'=>'brandChoices', 'class'=>'submenu'], FALSE );
-$this->closeUL( ['id'=>'brandChoices', 'class'=>'submenu', 'text' =>'
-
-                                                    '], FALSE );
+$this->openUL( [], FALSE );
+$this->closeUL( [], FALSE );
 $this->closeDiv( [], FALSE );
 $this->closeDiv( [], FALSE );
 $this->closeLI( [], FALSE );
