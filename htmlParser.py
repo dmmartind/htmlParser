@@ -27,6 +27,27 @@ def convertTuple(aInput, data=None):
     str += ']'
     return str
 
+def convertData(aInput, data=None):
+    str = '['
+    if data != None and data != "":
+        temp = ['text', data] 
+        
+    length = len(aInput)
+    counter = 0
+    for attr in aInput:
+        if len(attr[0]) == 1 and len(attr[1]) == 1:
+            if data != None:
+                str += "'text' =>" + "'" + data + "'"
+        elif counter < (length-1):
+            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\'' +', '
+        else:
+            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\''
+            if data != None:
+                str += ', ' + "'text' =>" + "'" + data + "'"
+        counter += 1
+    str += ']'
+    return str
+
 
 
    
@@ -85,6 +106,15 @@ def openTag(tag,attrs):
     elif tag == 'img':
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
+    elif tag == 'li':
+        stri = "$this->openLI( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
+    elif tag == 'ul':
+        stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
+    elif tag == 'img':
+        stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )    
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
 
@@ -94,14 +124,14 @@ def closeTag(tag, attr=None, data=None):
     if tag == 'html':
         strings.append( "$this->closeHtml(FALSE);" )
     elif tag == 'title':
-        stri =  "$this->Title( %s, FALSE );" % convertTuple(attr,data)
+        stri =  "$this->Title( %s, FALSE );" % convertData(attr,data)
         print("*********************************")
         print(attr)
         print(data)
         print("*********************************")
         strings.append( stri )
     elif tag == 'span':
-        stri = "$this->closeSpan( [], FALSE );"
+        stri = "$this->closeSpan( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
     elif tag == 'head':
         stri = "$this->closeHead( [], FALSE );"
@@ -110,7 +140,7 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->closeBody( [], FALSE );"
         strings.append( stri  )
     elif tag == 'p':
-        stri = "$this->closeP( [], FALSE );"
+        stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
     elif tag == 'noscript':
         stri = "$this->NoScript( [], FALSE );"
@@ -131,7 +161,7 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->Script( [], FALSE );"
         strings.append(stri )
     elif tag == 'div':
-        stri = "$this->closeDiv( [], FALSE );"
+        stri = "$this->closeDiv( %s, FALSE );" % convertData(attr,data)
         strings.append(stri )
     elif tag == 'input':
         stri = "$this->Input( [], FALSE );"
@@ -139,8 +169,19 @@ def closeTag(tag, attr=None, data=None):
     elif tag == 'form':
         stri = "$this->closeForm( [], FALSE );"
         strings.append( stri)
+    elif tag == 'li':
+        stri = "$this->closeLI( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
+    elif tag == 'ul':
+        stri = "$this->closeUL( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
     elif tag == 'label':
         stri = ""
+    elif tag == 'a':
+        stri = ""
+    elif tag == 'img':
+        stri = ""
+    
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
     
