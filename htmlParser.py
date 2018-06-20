@@ -6,6 +6,8 @@ strings = []
 fAttr= ""
 
 
+
+
 def convertTuple(aInput, data=None):
     str = '['
     if data != None and data != "":
@@ -18,9 +20,9 @@ def convertTuple(aInput, data=None):
             if data != None:
                 str += "'text' =>" + "'" + data + "'"
         elif counter < (length-1):
-            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\'' +', '
+            str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"' +', '
         else:
-            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\''
+            str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
             if data != None:
                 str += ', ' + "'text' =>" + "'" + data + "'"
         counter += 1
@@ -101,19 +103,20 @@ def openTag(tag,attrs):
         stri = "$this->openForm( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'a':
-        stri = ""
+        stri = "$this->aTag( %s, FALSE );" % convertTuple(attrs)
+        strings.append(stri)
     elif tag == 'img':
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'li':
         stri = "$this->openLI( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
+    elif tag == 'img':
+        stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
     elif tag == 'ul':
         stri = "$this->openUL( [], FALSE );"
         strings.append( stri  )
-    elif tag == 'img':
-        stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
-        strings.append( stri  )    
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
 
@@ -137,6 +140,7 @@ def closeTag(tag, attr=None, data=None):
         strings.append( stri )
     elif tag == 'body':
         stri = "$this->closeBody( [], FALSE );"
+        print("test")
         strings.append( stri  )
     elif tag == 'p':
         stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
@@ -160,7 +164,7 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->Script( [], FALSE );"
         strings.append(stri )
     elif tag == 'div':
-        stri = "$this->closeDiv( %s, FALSE );" % convertData(attr,data)
+        stri = "$this->closeDiv( [], FALSE );"
         strings.append(stri )
     elif tag == 'input':
         stri = "$this->Input( [], FALSE );"
@@ -170,14 +174,14 @@ def closeTag(tag, attr=None, data=None):
         strings.append( stri)
     elif tag == 'li':
         stri = "$this->closeLI( %s, FALSE );" % convertData(attr,data)
-        strings.append(stri)
-    elif tag == 'ul':
-        stri = "$this->closeUL( [], FALSE );"
-        strings.append(stri)
+        strings.append(stri)    
     elif tag == 'label':
         stri = ""
     elif tag == 'a':
-        stri = "$this->aTag( %s, FALSE );" % convertData(attr,data)
+        stri = "$this->closeaTag( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
+    elif tag == 'ul':
+        stri = "$this->closeUL( [], FALSE );"
         strings.append(stri)
     elif tag == 'img':
         stri = ""
@@ -202,11 +206,13 @@ class MyHtmlParser(HTMLParser):
     def handle_endtag(self, tag):
         print("End tag   :", tag)        
         if self.found == 1:
+            print("____________________")
+            for attr in self.Abucket:
+                print("    attr:", attr)
+                print("____________________")
             closeTag(tag,self.Abucket, self.Dbucket)
-            self.Abucket = ""
-            self.Dbucket = ""
-            self.found = 0;
-        if tag == 'html' or tag == 'body' or tag == 'form':
+            
+        if tag == 'form':
             closeTag(tag)
             
     def handle_data(self, data):
