@@ -11,42 +11,52 @@ fAttr= ""
 def convertTuple(aInput, data=None):
     str = '['
     if data != None and data != "":
-        temp = ['text', data] 
-        aInput.append(data)
+        temp = ['text', data.strip()] 
+        aInput.append(temp)
     length = len(aInput)
+    print("~~~~~~~~~~~~~start~~~~~~~~~~~~~~~~~~~~~~")
+    print(length)
+    print(data)
+    print("~~~~~~~~~~~~~stop~~~~~~~~~~~~~~~~~~~~~~")
     counter = 0
     for attr in aInput:
-        if len(attr[0]) == 1 and len(attr[1]) == 1:
-            if data != None:
-                str += "'text' =>" + "'" + data + "'"
-        elif counter < (length-1):
+        
+        if counter < (length-1):
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"' +', '
         else:
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
-            if data != None:
-                str += ', ' + "'text' =>" + "'" + data + "'"
         counter += 1
+    print(counter)
+    print("times")
+    if data != None and counter == 0:
+        
+        str += "'text' =>" + "'" + data + "'"
     str += ']'
     return str
 
 def convertData(aInput, data=None):
     str = '['
     if data != None and data != "":
-        temp = ['text', data] 
-        
+        temp = ['text', data.strip()] 
+        aInput.append(temp)
     length = len(aInput)
+    print("~~~~~~~~~~~~~Datastart~~~~~~~~~~~~~~~~~~~~~~")
+    print(length)
+    print(data)
+    print("~~~~~~~~~~~~~Datastop~~~~~~~~~~~~~~~~~~~~~~")
     counter = 0
     for attr in aInput:
-        if len(attr[0]) == 1 and len(attr[1]) == 1:
-            if data != None:
-                str += "'text' =>" + "'" + data + "'"
-        elif counter < (length-1):
-            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\'' +', '
+       
+        if counter < (length-1):
+            str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"' +', '
         else:
-            str += '\''+attr[0] +'\'' + '=>' + '\'' + attr[1] + '\''
-            if data != None:
-                str += ', ' + "'text' =>" + "'" + data + "'"
+            str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
         counter += 1
+    print(counter)
+    print("Datatimes")
+    if data != None and counter == 0:
+        
+        str += "'text' =>" + "'" + data + "'"
     str += ']'
     return str
 
@@ -116,21 +126,22 @@ def openTag(tag,attrs):
         strings.append( stri  )
     elif tag == 'ul':
         stri = "$this->openUL( [], FALSE );"
+    elif tag == 'h1':
+        stri = "$this->openH1( [], FALSE );"
         strings.append( stri  )
+    elif tag == 'strong':
+        stri = ""
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
 
         
 
 def closeTag(tag, attr=None, data=None):
+    
     if tag == 'html':
         strings.append( "$this->closeHtml(FALSE);" )
     elif tag == 'title':
         stri =  "$this->Title( %s, FALSE );" % convertData(attr,data)
-        print("*********************************")
-        print(attr)
-        print(data)
-        print("*********************************")
         strings.append( stri )
     elif tag == 'span':
         stri = "$this->closeSpan( %s, FALSE );" % convertData(attr,data)
@@ -180,9 +191,15 @@ def closeTag(tag, attr=None, data=None):
     elif tag == 'a':
         stri = "$this->closeaTag( %s, FALSE );" % convertData(attr,data)
         strings.append(stri)
+    elif tag == 'strong':
+        stri = "$this->strong( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
     elif tag == 'ul':
         stri = "$this->closeUL( [], FALSE );"
         strings.append(stri)
+    elif tag == 'h1':
+        stri = "$this->closeH1( [], FALSE );"
+        strings.append( stri  )
     elif tag == 'img':
         stri = ""
     
@@ -218,9 +235,9 @@ class MyHtmlParser(HTMLParser):
     def handle_data(self, data):
         print("Data     :", data)
         print("length   :", len(data))
-        if len(data) != 1:
-            self.Dbucket = data
-            self.found = 1
+        #if len(data) != 1:
+        self.Dbucket = data
+        self.found = 1
     def handle_comment(self, data):
         print("Comment    :", data)
     def handle_entityref(self,name):
