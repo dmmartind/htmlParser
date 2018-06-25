@@ -20,8 +20,10 @@ def convertTuple(aInput, data=None):
     print("~~~~~~~~~~~~~stop~~~~~~~~~~~~~~~~~~~~~~")
     counter = 0
     for attr in aInput:
-        
-        if counter < (length-1):
+        print(attr);
+        if attr[1] == None:
+            str += '\''+attr[0] +',\''
+        elif counter < (length-1):
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"' +', '
         else:
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
@@ -125,9 +127,16 @@ def openTag(tag,attrs):
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'ul':
-        stri = "$this->openUL( [], FALSE );"
+        stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
     elif tag == 'h1':
         stri = "$this->openH1( [], FALSE );"
+        strings.append( stri  )
+    elif tag == 'option':
+        stri = "$this->option( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
+    elif tag == 'select':
+        stri = "$this->select( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'strong':
         stri = ""
@@ -200,6 +209,10 @@ def closeTag(tag, attr=None, data=None):
     elif tag == 'h1':
         stri = "$this->closeH1( [], FALSE );"
         strings.append( stri  )
+    elif tag == 'select':
+        stri = ""
+    elif tag == 'option':
+        stri = ""        
     elif tag == 'img':
         stri = ""
     
