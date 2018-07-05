@@ -162,41 +162,41 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->closeSpan( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
     elif tag == 'head':
-        stri = "$this->closeHead( [], FALSE );"
+        stri = "$this->closeHead( FALSE );"
         strings.append( stri )
     elif tag == 'body':
-        stri = "$this->closeBody( [], FALSE );"
+        stri = "$this->closeBody( FALSE );"
         print("test")
         strings.append( stri  )
     elif tag == 'p':
         stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
     elif tag == 'noscript':
-        stri = "$this->NoScript( [], FALSE );"
+        stri = "$this->NoScript( FALSE );"
         strings.append( stri )
     elif tag == 'link':
-        stri = "$this->Link( [], FALSE );"
+        stri = "$this->Link( FALSE );"
         strings.append(stri  )
     elif tag == 'button':
-        stri = "$this->Button( [], FALSE );"
+        stri = "$this->Button( FALSE );"
         strings.append(stri )
     elif tag == 'iframe':
-        stri = "$this->iFrame( [], FALSE );"
+        stri = "$this->iFrame( FALSE );"
         strings.append(stri )
     elif tag == 'meta':
-        str = "$this->Meta( [], FALSE );"
+        str = "$this->Meta( FALSE );"
         strings.append(stri )
     elif tag == 'script':
-        stri = "$this->Script( [], FALSE);"
+        stri = "$this->Script( FALSE);"
         strings.append(stri )
     elif tag == 'div':
-        stri = "$this->closeDiv( [], FALSE );"
+        stri = "$this->closeDiv( FALSE );"
         strings.append(stri )
     elif tag == 'input':
-        stri = "$this->Input( [], FALSE );"
+        stri = "$this->Input( FALSE );"
         strings.append( stri)
     elif tag == 'form':
-        stri = "$this->closeForm( [], FALSE );"
+        stri = "$this->closeForm( FALSE );"
         strings.append( stri)
     elif tag == 'li':
         stri = "$this->closeLI( %s, FALSE );" % convertData(attr,data)
@@ -210,16 +210,16 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->strong( %s, FALSE );"
         strings.append(stri)
     elif tag == 'ul':
-        stri = "$this->closeUL( [], FALSE);"
+        stri = "$this->closeUL( FALSE);"
         strings.append(stri)
     elif tag == 'h1':
-        stri = "$this->closeH1( [], FALSE );"
+        stri = "$this->closeH1( FALSE );"
         strings.append( stri  )
     elif tag == 'h3':
-        stri = "$this->closeH3( [], FALSE );"
+        stri = "$this->closeH3( FALSE );"
         strings.append( stri  )
     elif tag == 'section':
-        stri = "$this->closeSection( [], FALSE );"
+        stri = "$this->closeSection( FALSE );"
         strings.append( stri  )
     elif tag == 'select':
         stri = ""
