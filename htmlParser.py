@@ -82,8 +82,8 @@ def openTag(tag,attrs):
         stri = "$this->openBody( %s, FALSE );" % convertTuple(attrs)
         strings.append(stri)
     elif tag == 'p':
-        stri = "$this->openP( %s, FALSE );" % convertTuple(attrs)
-        strings.append( stri )
+        stri = ""
+        
     elif tag == 'noscript':
         stri = "$this->NoScript( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri )
@@ -106,8 +106,8 @@ def openTag(tag,attrs):
         stri = "$this->openDiv( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     elif tag == 'label':
-        stri = "$this->Label( %s, FALSE );" % convertTuple(attrs)
-        strings.append( stri )
+        stri = ""
+        
     elif tag == 'input':
         stri = "$this->Input( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
@@ -122,7 +122,7 @@ def openTag(tag,attrs):
         strings.append( stri  )
     elif tag == 'li':
         stri = "$this->openLI( %s, FALSE );" % convertTuple(attrs)
-        strings.append( stri  )
+        strings.append( stri  )                
     elif tag == 'img':
         stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
@@ -130,11 +130,11 @@ def openTag(tag,attrs):
         stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'h1':
-        stri = "$this->openH1( [], FALSE );"
-        strings.append( stri  )
+        stri = ""
+        
     elif tag == 'h3':
-        stri = "$this->openH3( [], FALSE );"
-        strings.append( stri  )
+        stri = "";
+        
     elif tag == 'option':
         stri = "$this->option( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
@@ -169,8 +169,8 @@ def closeTag(tag, attr=None, data=None):
         print("test")
         strings.append( stri  )
     elif tag == 'p':
-        stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
-        strings.append( stri )
+        stri = "$this->openP( %s, FALSE );" % convertData(attr,data)
+        strings.append( stri  )
     elif tag == 'noscript':
         stri = "$this->NoScript( FALSE );"
         strings.append( stri )
@@ -202,7 +202,8 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->closeLI( %s, FALSE );" % convertData(attr,data)
         strings.append(stri)    
     elif tag == 'label':
-        stri = ""
+        stri = "$this->Label( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)
     elif tag == 'a':
         stri = "$this->closeaTag( %s, FALSE );" % convertData(attr,data)
         strings.append(stri)
@@ -213,10 +214,10 @@ def closeTag(tag, attr=None, data=None):
         stri = "$this->closeUL( FALSE);"
         strings.append(stri)
     elif tag == 'h1':
-        stri = "$this->closeH1( FALSE );"
+        stri = "$this->openH1( %s, FALSE );" % convertData(attr,data)
         strings.append( stri  )
     elif tag == 'h3':
-        stri = "$this->closeH3( FALSE );"
+        stri = "$this->openH3(%s,  FALSE );" % convertData(attr,data)
         strings.append( stri  )
     elif tag == 'section':
         stri = "$this->closeSection( FALSE );"
