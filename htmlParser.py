@@ -83,6 +83,8 @@ def openTag(tag,attrs):
         strings.append(stri)
     elif tag == 'p':
         stri = ""
+    elif tag == 'textarea':
+        stri = "$this->TextArea( %s, FALSE );" 
         
     elif tag == 'noscript':
         stri = "$this->NoScript( %s, FALSE );" % convertTuple(attrs)
@@ -192,6 +194,9 @@ def closeTag(tag, attr=None, data=None):
     elif tag == 'div':
         stri = "$this->closeDiv( FALSE );"
         strings.append(stri )
+    elif tag == 'textarea':
+        stri = "$this->TextArea( %s, FALSE );" % convertData(attr,data)
+        strings.append(stri)    
     elif tag == 'input':
         stri = "$this->Input( FALSE );"
         strings.append( stri)
