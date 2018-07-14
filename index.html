@@ -15,9 +15,15 @@
 
 <body>
     <!--      6543w4456789765                        -->
- </div>
-</div>
-    <!-- 5567897654676 -->
+<span class="regular-price"><?php echo currency::format($regular_price); ?></span> <strong class="campaign-price"><?php echo currency::format($campaign_price); ?></strong>
+                        <?php } else { ?>
+                        <span class="price"><?php echo currency::format($regular_price); ?></span>
+                        <?php } ?>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+	<!-- 5567897654676 -->
 </body>
 
 </html>
