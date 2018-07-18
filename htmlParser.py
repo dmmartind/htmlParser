@@ -82,7 +82,8 @@ def openTag(tag,attrs):
         stri = "$this->openBody( %s, FALSE );" % convertTuple(attrs)
         strings.append(stri)
     elif tag == 'p':
-        stri = ""
+        stri = "$this->openP( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri  )
     elif tag == 'textarea':
         stri = "$this->TextArea( %s, FALSE );" 
         
@@ -135,11 +136,13 @@ def openTag(tag,attrs):
         stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'h1':
-        stri = ""
-        
+        stri = ""        
     elif tag == 'h3':
         stri = "";
-        
+    elif tag == 'br':
+        stri = "";
+    elif tag == 'b':
+        stri = "";        
     elif tag == 'option':
         stri = "$this->option( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
@@ -174,7 +177,7 @@ def closeTag(tag, attr=None, data=None):
         print("test")
         strings.append( stri  )
     elif tag == 'p':
-        stri = "$this->openP( %s, FALSE );" % convertData(attr,data)
+        stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
         strings.append( stri  )
     elif tag == 'noscript':
         stri = "$this->NoScript( FALSE );"
@@ -229,6 +232,12 @@ def closeTag(tag, attr=None, data=None):
         strings.append( stri  )
     elif tag == 'h3':
         stri = "$this->openH3(%s,  FALSE );" % convertData(attr,data)
+        strings.append( stri  )
+    elif tag == 'br':
+        stri = "$this->openBR(%s,  FALSE );" % convertData(attr,data)
+        strings.append( stri  )
+    elif tag == 'b':
+        stri = "$this->openB(%s,  FALSE );" % convertData(attr,data)
         strings.append( stri  )
     elif tag == 'section':
         stri = "$this->closeSection( FALSE );"
