@@ -15,7 +15,10 @@ $this->Script( ['src'=>"index.js"], FALSE );
 $this->Script( FALSE);
 $this->closeHead( FALSE );
 $this->openBody( [], FALSE );
-$this->closeP( ['text'=>""], FALSE );
+$this->openHtml(FALSE);
+$this->openBody( [], FALSE );
+$this->closeBody( FALSE );
+$this->closeHtml(FALSE);
 $this->closeBody( FALSE );
 $this->closeHtml(FALSE);
 ?>
