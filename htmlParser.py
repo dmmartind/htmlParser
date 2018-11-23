@@ -71,6 +71,10 @@ def openTag(tag,attrs):
     
     if tag == 'html':
         strings.append(  "$this->openHtml(FALSE);")
+    elif tag == 'center':
+        strings.append(  "$this->openCenter(FALSE);")
+    elif tag == 'pre':
+        strings.append(  "$this->openPre(FALSE);")
     elif tag == 'title':
         fAttr = attrs
     elif tag == 'span':
@@ -107,6 +111,15 @@ def openTag(tag,attrs):
         strings.append( stri )
     elif tag == 'div':
         stri = "$this->openDiv( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri )
+    elif tag == 'table':
+        stri = "$this->openTable( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri )
+    elif tag == 'tr':
+        stri = "$this->openTr( %s, FALSE );" % convertTuple(attrs)
+        strings.append( stri )
+    elif tag == 'td':
+        stri = "$this->openTd( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri )
     elif tag == 'label':
         stri = ""
@@ -163,6 +176,10 @@ def closeTag(tag, attr=None, data=None):
     
     if tag == 'html':
         strings.append( "$this->closeHtml(FALSE);" )
+    elif tag == 'center':
+        strings.append( "$this->closeCenter(FALSE);" )
+    elif tag == 'pre':
+        strings.append( "$this->closePre(FALSE);" )
     elif tag == 'title':
         stri =  "$this->Title( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
@@ -199,6 +216,15 @@ def closeTag(tag, attr=None, data=None):
         strings.append(stri )
     elif tag == 'div':
         stri = "$this->closeDiv( FALSE );"
+        strings.append(stri )
+    elif tag == 'table':
+        stri = "$this->closeTable( FALSE );"
+        strings.append(stri )
+    elif tag == 'tr':
+        stri = "$this->closeTr( FALSE );"
+        strings.append(stri )
+    elif tag == 'td':
+        stri = "$this->closeTd( FALSE );"
         strings.append(stri )
     elif tag == 'textarea':
         stri = "$this->TextArea( %s, FALSE );" % convertData(attr,data)
