@@ -77,6 +77,8 @@ def openTag(tag,attrs):
         strings.append(  "$this->openPre(FALSE);")
     elif tag == 'title':
         fAttr = attrs
+    elif tag == 'option':
+        fAttr = attrs
     elif tag == 'span':
         strings.append(  "$this->openSpan( %s, FALSE );" % convertTuple(attrs))
     elif tag == 'head':
@@ -182,6 +184,9 @@ def closeTag(tag, attr=None, data=None):
         strings.append( "$this->closePre(FALSE);" )
     elif tag == 'title':
         stri =  "$this->Title( %s, FALSE );" % convertData(attr,data)
+        strings.append( stri )
+    elif tag == 'option':
+        stri =  "$this->Option( %s, FALSE );" % convertData(attr,data)
         strings.append( stri )
     elif tag == 'span':
         stri = "$this->closeSpan( %s, FALSE );" % convertData(attr,data)
