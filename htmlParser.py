@@ -1,20 +1,21 @@
 from html.parser import HTMLParser
 from html.entities import name2codepoint
 
-#initial
 strings = []
+
 fAttr= ""
 
 
 
-#handles the attributes of the open tag
-def convertBData(aInput, data=None):
+
+def convertAttr(aInput, data=None):
     str = '['
     if data != None and data != "":
         temp = ['text', data.strip()] 
         aInput.append(temp)
     length = len(aInput)
     counter = 0
+    for attr in aInput:
         if attr[1] == None:
             str += '\''+attr[0] +',\''
         elif counter < (length-1):
@@ -23,12 +24,10 @@ def convertBData(aInput, data=None):
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
         counter += 1
     if data != None and counter == 0:
-        
         str += "'text' =>" + "'" + data + "'"
     str += ']'
     return str
 
-#handles the attributes of the close tag
 def convertData(aInput, data=None):
     str = '['
     if data != None and data != "":
@@ -37,14 +36,12 @@ def convertData(aInput, data=None):
     length = len(aInput)
     counter = 0
     for attr in aInput:
-       
         if counter < (length-1):
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"' +', '
         else:
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
         counter += 1
     if data != None and counter == 0:
-        
         str += "'text' =>" + "'" + data + "'"
     str += ']'
     return str
@@ -53,7 +50,7 @@ def convertData(aInput, data=None):
 
    
         
-#handles the open tag
+
 def openTag(tag,attrs):
     
     if tag == 'html':
@@ -67,74 +64,75 @@ def openTag(tag,attrs):
     elif tag == 'option':
         fAttr = attrs
     elif tag == 'span':
-        strings.append(  "$this->openSpan( %s, FALSE );" % convertBData(attrs))
+        strings.append(  "$this->openSpan( %s, FALSE );" % convertAttr(attrs))
     elif tag == 'head':
-        stri = "$this->openHead( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openHead( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'body':
-        stri = "$this->openBody( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openBody( %s, FALSE );" % convertAttr(attrs)
         strings.append(stri)
     elif tag == 'p':
-        stri = "$this->openP( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openP( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'textarea':
-        stri = "$this->TextArea( %s, FALSE );"         
+        stri = "$this->TextArea( %s, FALSE );" 
+        
     elif tag == 'noscript':
-        stri = "$this->NoScript( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->NoScript( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'link':
-        stri = "$this->Link( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Link( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'button':
-        stri = "$this->Button( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Button( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'iframe':
-        stri = "$this->iFrame( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->iFrame( %s, FALSE );" % convertAttr(attrs)
         strings.append(stri  )
     elif tag == 'meta':
-        stri = "$this->Meta( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Meta( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'script':
-        stri = "$this->Script( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Script( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'div':
-        stri = "$this->openDiv( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openDiv( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'table':
-        stri = "$this->openTable( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openTable( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'tr':
-        stri = "$this->openTr( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openTr( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'td':
-        stri = "$this->openTd( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openTd( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri )
     elif tag == 'label':
         stri = ""
         
     elif tag == 'input':
-        stri = "$this->Input( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Input( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'form':
-        stri = "$this->openForm( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openForm( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'a':
-        stri = "$this->aTag( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->aTag( %s, FALSE );" % convertAttr(attrs)
         strings.append(stri)
     elif tag == 'img':
-        stri = "$this->Image( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Image( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'li':
-        stri = "$this->openLI( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openLI( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'ol':
-        stri = "$this->openOL( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openOL( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'img':
-        stri = "$this->Image( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->Image( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'ul':
-        stri = "$this->openUL( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openUL( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'h1':
         stri = ""        
@@ -145,13 +143,13 @@ def openTag(tag,attrs):
     elif tag == 'b':
         stri = "";        
     elif tag == 'option':
-        stri = "$this->option( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->option( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'select':
-        stri = "$this->select( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->select( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'section':
-        stri = "$this->openSection( %s, FALSE );" % convertBData(attrs)
+        stri = "$this->openSection( %s, FALSE );" % convertAttr(attrs)
         strings.append( stri  )
     elif tag == 'strong':
         stri = ""
@@ -159,7 +157,7 @@ def openTag(tag,attrs):
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
 
         
-#handles the close tag
+
 def closeTag(tag, attr=None, data=None):
     
     if tag == 'html':
@@ -268,7 +266,7 @@ def closeTag(tag, attr=None, data=None):
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
     
-#html parser class
+
 class MyHtmlParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
@@ -279,7 +277,8 @@ class MyHtmlParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         openTag(tag,attrs)
         self.Abucket = attrs
-    def handle_endtag(self, tag):
+    def handle_endtag(self, tag):        
+        if self.found == 1:
             closeTag(tag,self.Abucket, self.Dbucket)            
         if tag == 'form':
             closeTag(tag)
@@ -287,15 +286,18 @@ class MyHtmlParser(HTMLParser):
     def handle_data(self, data):
         self.Dbucket = data
         self.found = 1
-   
+    
+
+    def handle_entityref(self,name):
+        c = chr(name2codepoint[name])
     def handle_charref(self, name):
         if name.startswitch('x'):
             c=chr(int(name[1:], 16))
         else:
             c= chr(int(name))
+    
 
 
-#main
 parser = MyHtmlParser()
 str = open('index.html', 'r').read()
 parser.feed(str)
@@ -308,3 +310,4 @@ for line in strings:
     hdl.write("\n")
 hdl.write('?>')
 hdl.close()
+
