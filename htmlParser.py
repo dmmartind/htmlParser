@@ -1,14 +1,14 @@
 from html.parser import HTMLParser
 from html.entities import name2codepoint
 
+#initial
 strings = []
-
 fAttr= ""
 
 
 
-
-def convertTuple(aInput, data=None):
+#handles the attributes of the open tag
+def convertBData(aInput, data=None):
     str = '['
     if data != None and data != "":
         temp = ['text', data.strip()] 
@@ -28,6 +28,7 @@ def convertTuple(aInput, data=None):
     str += ']'
     return str
 
+#handles the attributes of the close tag
 def convertData(aInput, data=None):
     str = '['
     if data != None and data != "":
@@ -52,7 +53,7 @@ def convertData(aInput, data=None):
 
    
         
-
+#handles the open tag
 def openTag(tag,attrs):
     
     if tag == 'html':
@@ -66,74 +67,74 @@ def openTag(tag,attrs):
     elif tag == 'option':
         fAttr = attrs
     elif tag == 'span':
-        strings.append(  "$this->openSpan( %s, FALSE );" % convertTuple(attrs))
+        strings.append(  "$this->openSpan( %s, FALSE );" % convertBData(attrs))
     elif tag == 'head':
-        stri = "$this->openHead( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openHead( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'body':
-        stri = "$this->openBody( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openBody( %s, FALSE );" % convertBData(attrs)
         strings.append(stri)
     elif tag == 'p':
-        stri = "$this->openP( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openP( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'textarea':
         stri = "$this->TextArea( %s, FALSE );"         
     elif tag == 'noscript':
-        stri = "$this->NoScript( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->NoScript( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'link':
-        stri = "$this->Link( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Link( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'button':
-        stri = "$this->Button( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Button( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'iframe':
-        stri = "$this->iFrame( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->iFrame( %s, FALSE );" % convertBData(attrs)
         strings.append(stri  )
     elif tag == 'meta':
-        stri = "$this->Meta( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Meta( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'script':
-        stri = "$this->Script( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Script( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'div':
-        stri = "$this->openDiv( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openDiv( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'table':
-        stri = "$this->openTable( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openTable( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'tr':
-        stri = "$this->openTr( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openTr( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'td':
-        stri = "$this->openTd( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openTd( %s, FALSE );" % convertBData(attrs)
         strings.append( stri )
     elif tag == 'label':
         stri = ""
         
     elif tag == 'input':
-        stri = "$this->Input( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Input( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'form':
-        stri = "$this->openForm( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openForm( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'a':
-        stri = "$this->aTag( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->aTag( %s, FALSE );" % convertBData(attrs)
         strings.append(stri)
     elif tag == 'img':
-        stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Image( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'li':
-        stri = "$this->openLI( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openLI( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'ol':
-        stri = "$this->openOL( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openOL( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'img':
-        stri = "$this->Image( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->Image( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'ul':
-        stri = "$this->openUL( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openUL( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'h1':
         stri = ""        
@@ -144,13 +145,13 @@ def openTag(tag,attrs):
     elif tag == 'b':
         stri = "";        
     elif tag == 'option':
-        stri = "$this->option( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->option( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'select':
-        stri = "$this->select( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->select( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'section':
-        stri = "$this->openSection( %s, FALSE );" % convertTuple(attrs)
+        stri = "$this->openSection( %s, FALSE );" % convertBData(attrs)
         strings.append( stri  )
     elif tag == 'strong':
         stri = ""
@@ -158,7 +159,7 @@ def openTag(tag,attrs):
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
 
         
-
+#handles the close tag
 def closeTag(tag, attr=None, data=None):
     
     if tag == 'html':
@@ -267,7 +268,7 @@ def closeTag(tag, attr=None, data=None):
     else:
         strings.append("echo 'Error: no matching code for tag: %s'" % tag)
     
-
+#html parser class
 class MyHtmlParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
@@ -276,7 +277,6 @@ class MyHtmlParser(HTMLParser):
         self.found = 0;
     
     def handle_starttag(self, tag, attrs):
-        print("Start tag: ", tag)
         openTag(tag,attrs)
         self.Abucket = attrs
     def handle_endtag(self, tag):
@@ -295,6 +295,7 @@ class MyHtmlParser(HTMLParser):
             c= chr(int(name))
 
 
+#main
 parser = MyHtmlParser()
 str = open('index.html', 'r').read()
 parser.feed(str)
@@ -307,4 +308,3 @@ for line in strings:
     hdl.write("\n")
 hdl.write('?>')
 hdl.close()
-
