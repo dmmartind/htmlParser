@@ -14,13 +14,7 @@ def convertTuple(aInput, data=None):
         temp = ['text', data.strip()] 
         aInput.append(temp)
     length = len(aInput)
-    print("~~~~~~~~~~~~~start~~~~~~~~~~~~~~~~~~~~~~")
-    print(length)
-    print(data)
-    print("~~~~~~~~~~~~~stop~~~~~~~~~~~~~~~~~~~~~~")
     counter = 0
-    for attr in aInput:
-        print(attr);
         if attr[1] == None:
             str += '\''+attr[0] +',\''
         elif counter < (length-1):
@@ -28,8 +22,6 @@ def convertTuple(aInput, data=None):
         else:
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
         counter += 1
-    print(counter)
-    print("times")
     if data != None and counter == 0:
         
         str += "'text' =>" + "'" + data + "'"
@@ -42,10 +34,6 @@ def convertData(aInput, data=None):
         temp = ['text', data.strip()] 
         aInput.append(temp)
     length = len(aInput)
-    print("~~~~~~~~~~~~~Datastart~~~~~~~~~~~~~~~~~~~~~~")
-    print(length)
-    print(data)
-    print("~~~~~~~~~~~~~Datastop~~~~~~~~~~~~~~~~~~~~~~")
     counter = 0
     for attr in aInput:
        
@@ -54,8 +42,6 @@ def convertData(aInput, data=None):
         else:
             str += '\''+attr[0] +'\'' + '=>' + '\"' + attr[1] + '\"'
         counter += 1
-    print(counter)
-    print("Datatimes")
     if data != None and counter == 0:
         
         str += "'text' =>" + "'" + data + "'"
@@ -91,8 +77,7 @@ def openTag(tag,attrs):
         stri = "$this->openP( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri  )
     elif tag == 'textarea':
-        stri = "$this->TextArea( %s, FALSE );" 
-        
+        stri = "$this->TextArea( %s, FALSE );"         
     elif tag == 'noscript':
         stri = "$this->NoScript( %s, FALSE );" % convertTuple(attrs)
         strings.append( stri )
@@ -196,7 +181,6 @@ def closeTag(tag, attr=None, data=None):
         strings.append( stri )
     elif tag == 'body':
         stri = "$this->closeBody( FALSE );"
-        print("test")
         strings.append( stri  )
     elif tag == 'p':
         stri = "$this->closeP( %s, FALSE );" % convertData(attr,data)
@@ -293,41 +277,22 @@ class MyHtmlParser(HTMLParser):
     
     def handle_starttag(self, tag, attrs):
         print("Start tag: ", tag)
-        for attr in attrs:
-            print("    attr:", attr)
         openTag(tag,attrs)
         self.Abucket = attrs
     def handle_endtag(self, tag):
-        print("End tag   :", tag)        
-        if self.found == 1:
-            print("____________________")
-            for attr in self.Abucket:
-                print("    attr:", attr)
-                print("____________________")
-            closeTag(tag,self.Abucket, self.Dbucket)
-            
+            closeTag(tag,self.Abucket, self.Dbucket)            
         if tag == 'form':
             closeTag(tag)
             
     def handle_data(self, data):
-        print("Data     :", data)
-        print("length   :", len(data))
-        #if len(data) != 1:
         self.Dbucket = data
         self.found = 1
-    def handle_comment(self, data):
-        print("Comment    :", data)
-    def handle_entityref(self,name):
-        c = chr(name2codepoint[name])
-        print("Named ent: ", c)
+   
     def handle_charref(self, name):
         if name.startswitch('x'):
             c=chr(int(name[1:], 16))
         else:
             c= chr(int(name))
-        print("Num ent     :", c)
-    def handle_decl(self, data):
-        print("Decl     :", data)
 
 
 parser = MyHtmlParser()
